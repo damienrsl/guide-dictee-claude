@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dicter à Claude, net du premier coup</title>
+<style>
+/*KIT*/
+main{max-width:640px;margin:0 auto;position:relative;z-index:1;padding:0 16px 60px}
+.hero{padding:60px 4px 26px;position:relative}
+.hero .orbe{--d:70px;position:absolute;right:6px;top:44px;animation:souffle 6s ease-in-out infinite}
+@keyframes souffle{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+.hero h1{font-size:33px;line-height:1.08;letter-spacing:-.03em;max-width:12ch}
+.hero p{margin:16px 0 0;font-size:16px;line-height:1.5;max-width:34ch;color:var(--texte-2)}
+.hero p b,.carte p b,.franc b,.bilan b{color:var(--texte)}
+section{margin:34px 0}
+section>.etiquette{display:block;margin:0 4px 10px}
+.carte{padding:20px;margin-bottom:12px}
+.carte h2{font-size:23px;letter-spacing:-.02em;line-height:1.15}
+.carte p{margin:10px 0 0;line-height:1.55;color:var(--texte-2)}
+.franc{border-left:2px solid var(--pan-2);padding:14px 16px;margin:14px 0 0;color:var(--texte-2);font-size:14px;line-height:1.5;border-radius:0 var(--r-m) var(--r-m) 0;background:rgba(40,95,255,.06)}
+.spec{padding:14px 0;border-top:1px solid var(--filet)}
+.spec:first-of-type{border-top:0;padding-top:4px}
+.num{font:600 12px var(--police-mono);color:var(--pan-3);letter-spacing:.06em}
+.spec h3{font-size:18px;margin-top:4px}
+.spec p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--texte-2)}
+.dictee{font-size:15px;line-height:1.6;color:var(--texte-2);margin:10px 0 0;padding:14px 16px;border-radius:var(--r-m);background:rgba(255,255,255,.6);border:1px solid var(--filet)}
+.dictee mark{background:rgba(40,95,255,.14);color:var(--texte);border-radius:4px;padding:0 3px}
+.dictee s{color:var(--texte-3);text-decoration-color:rgba(36,54,184,.5)}
+.formule{font-family:var(--large);font-size:20px;line-height:1.35;letter-spacing:-.02em;margin:12px 0 0}
+.formule b{color:var(--pan-3);font-weight:600}
+.puces{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.puce{background:rgba(255,255,255,.7);border:1px solid var(--filet);color:var(--texte-2);font:500 14px var(--police);padding:9px 14px;border-radius:var(--r-pilule);cursor:pointer;transition:all .3s var(--ressort);-webkit-tap-highlight-color:transparent}
+.puce.on{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--bleu-chat),var(--bleu-renard));box-shadow:0 6px 16px -6px rgba(36,54,184,.6);transform:scale(1.04)}
+.puce.faux{opacity:.4;transform:scale(.96)}
+.bilan{margin-top:14px;font-size:14px;color:var(--texte-2);line-height:1.5;min-height:22px}
+.suite{margin-top:12px;background:none;border:1px solid var(--filet);color:var(--pan-3);font:600 13px var(--police);padding:8px 14px;border-radius:var(--r-pilule);cursor:pointer;display:none}
+.suite.vu{display:inline-block}
+.score{font:600 11px var(--police-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--texte-3);margin-left:10px}
+.pied{font-size:13px;color:var(--texte-3);line-height:1.5;margin:40px 4px 0}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <span class="orbe"></span>
+    <span class="etiquette">Toi et Claude · dicter</span>
+    <h1>Dicter aussi net que tu écris</h1>
+    <p>Ton constat du 14/11 : <b>à l'oral tu vas 3 fois plus vite, mais le prompt perd un tiers de sa précision.</b> La précision ne vient pas des mots : elle vient de l'ordre. Quatre temps, toujours les mêmes.</p>
+  </header>
+
+  <section>
+    <span class="etiquette">La formule, à dire dans cet ordre</span>
+    <div class="verre carte">
+      <p class="formule"><b>Je veux</b> [le livrable], <b>pour</b> [le but], <b>à partir de</b> [la source, où elle est], <b>en</b> [la contrainte]. <b>Ce que je ne sais pas encore :</b> [le flou].</p>
+      <div class="franc"><b>Pourquoi ça marche :</b> Tokn remet chaque dictée au propre dans exactement ces cases (Objectif, Livrable, Contexte, Contraintes, Pas encore dit). Si tu les dis dans l'ordre, rien ne se perd à la traduction.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Ta dictée de ce matin, avant / après</span>
+    <div class="verre carte">
+      <p class="dictee"><s>Là, j'ai une pensée. Quand on parle avec Claude, l'écriture, en fait, quand on fait des prompts écrits, on va plus lentement, mais notre prompt est meilleur… même si notre audio est moins bon de 1,5, on va trois fois plus vite…</s> J'aimerais que tu me fasses <mark>un cours dans ma direction artistique</mark> qui m'apprend <mark>à être précis à l'oral</mark>, parce qu'à l'écrit je suis plutôt bon.</p>
+      <p class="dictee"><mark>Je veux</mark> un guide court dans ma DA, <mark>pour</mark> dicter aussi précis que j'écris, <mark>à partir de</mark> l'enregistrement 17 dans Téléchargements, <mark>en</mark> une page. <mark>Ce que je ne sais pas encore :</mark> rien.</p>
+      <div class="franc"><b>Ce qui manquait :</b> où était l'enregistrement. J'ai dû le chercher dans tes mails, tes captures et ton Mac avant de commencer. Une source nommée = zéro détour.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Les 3 pièges de l'oral, et la parade</span>
+    <div class="verre carte">
+      <div class="spec"><span class="num">01 · LE RAISONNEMENT AVANT LA DEMANDE</span><h3>Tu expliques 40 secondes, tu demandes en 5</h3>
+        <p>À l'oral on pense en parlant. Inverse : la demande d'abord, le pourquoi après, seulement s'il change le résultat.</p></div>
+      <div class="spec"><span class="num">02 · LE FICHIER FANTÔME</span><h3>« L'enregistrement », « le doc », « la vidéo »</h3>
+        <p>Chaque chose a un nom et un lieu. Dis les deux : « le m4a dans Téléchargements », « le brief Uniqlo dans damienprime ».</p></div>
+      <div class="spec"><span class="num">03 · LA CORRECTION EN DIRECT</span><h3>« en fait », « enfin », « pour autant »</h3>
+        <p>Tu te reprends à voix haute et les deux versions arrivent. Marque un silence, puis redis la phrase entière. Seule la dernière compte.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Le jeu : qu'est-ce qui manque ? <span class="score" id="score"></span></span>
+    <div class="verre carte">
+      <p class="dictee" id="jdictee"></p>
+      <div class="puces" id="jpuces"></div>
+      <div class="bilan" id="jbilan"></div>
+      <button class="suite" id="jsuite">Dictée suivante</button>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Le réflexe quand Tokn te répond</span>
+    <div class="verre carte">
+      <h2>« Pas encore dit » = le trou de ta dictée</h2>
+      <p>Quand la version remise au propre affiche une ligne <b>Pas encore dit</b>, ne redicte pas tout. Réponds à cette ligne, en un mot ou un nom de fichier. C'est ton seul retour à faire.</p>
+    </div>
+  </section>
+
+  <p class="pied">Fait depuis « Nouvel enregistrement 17 » (61 s, 14/11). Ton ratio 3× / 1,5× est ton estimation, pas une mesure : si tu veux, je la mesure sur une semaine de dictées.</p>
+</main>
+<script>
+const J=[
+ {d:"Fais-moi la miniature pour J12, dans le style des autres, avec le titre en gros.",o:["Le livrable","Le but","La source","La contrainte"],r:2,e:"Quelle photo ? Quel titre exactement ? Sans la source, je choisis à ta place et tu refais un aller-retour."},
+ {d:"Je veux un script pour la vidéo Heattech, à partir du brief Uniqlo dans damienprime, en 45 secondes.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Tout y est : livrable, source nommée, contrainte. Le but est évident ici, pas besoin de le dire."},
+ {d:"Regarde mes stats et dis-moi ce qui marche, à partir de YouTube, mais pas un pavé.",o:["Le livrable","Le but","La source","La contrainte"],r:0,e:"« Dis-moi » n'est pas un livrable. Un tableau ? Trois lignes ? Une page ? Dis la forme, tu auras la forme."},
+ {d:"Trie mes mails de collab, à partir de Gmail depuis lundi, juste une ligne par marque.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Complet. Et « juste une ligne par marque » fait à la fois contrainte et livrable."}
+];
+let i=0,pts=0;
+const D=document.getElementById("jdictee"),P=document.getElementById("jpuces"),B=document.getElementById("jbilan"),S=document.getElementById("jsuite"),SC=document.getElementById("score");
+function show(){const j=J[i];D.textContent="« "+j.d+" »";B.textContent="";S.classList.remove("vu");P.innerHTML="";
+ j.o.forEach((t,k)=>{const b=document.createElement("button");b.className="puce";b.textContent=t;b.onclick=()=>rep(k,b);P.appendChild(b)});
+ SC.textContent=(i+1)+" / "+J.length}
+function rep(k,b){if(B.textContent)return;const ok=k===J[i].r;if(ok)pts++;
+ [...P.children].forEach((e,n)=>e.classList.add(n===J[i].r?"on":"faux"));
+ B.innerHTML=(ok?"<b>Oui.</b> ":"<b>Non, c'était « "+J[i].o[J[i].r]+" ».</b> ")+J[i].e;
+ S.classList.add("vu");S.textContent=i<J.length-1?"Dictée suivante":"Score : "+pts+" / "+J.length+" · rejouer"}
+S.onclick=()=>{if(i<J.length-1){i++}else{i=0;pts=0}show()};
+show();
+</script>
+</body>
+</html>
