@@ -83,7 +83,7 @@ body.aura .pied{font-size:14px!important}
 .grille>.spec,.grille>.chiffre,.grille>.modele{border-top:0!important;padding:20px 22px!important;margin:0!important;background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.95);border-radius:var(--r-l);box-shadow:0 8px 24px -18px rgba(12,20,98,.25);transition:transform .35s var(--ressort),box-shadow .35s}
 .grille>*:hover{transform:translateY(-2px);box-shadow:0 18px 34px -18px rgba(12,20,98,.35)}
 .grille>.chiffre{display:block}
-.grille>.chiffre .gros{display:block;font-size:clamp(40px,4.6vw,64px)!important;min-width:0!important;margin-bottom:10px;line-height:.95}
+.grille>.chiffre .gros{display:block;white-space:nowrap;font-size:clamp(34px,3.6vw,56px)!important;min-width:0!important;margin-bottom:10px;line-height:.95}
 .grille>.chiffre .barre{margin-top:14px}
 .grille>.modele{margin:0!important}
 .grille+.franc{grid-column:1/-1}
@@ -91,7 +91,7 @@ body.aura .pied{font-size:14px!important}
 body.aura .puce{font-size:1rem!important;padding:12px 18px!important;border-radius:16px!important;line-height:1.35}
 body.aura .suite{font-size:15px!important;padding:11px 18px!important}
 body.aura .objectif{font-size:1.05rem!important;gap:10px 18px!important}
-body.aura .objectif .v{font-size:14px!important}
+body.aura .objectif .v{font-size:1.1rem!important}
 /* chaque fait = une carte, chaque jeu = large */
 @media(min-width:900px){body.aura section.large .carte{padding:40px 48px!important}}
 @media(prefers-reduced-motion:reduce){.grille>*{transition:none}}
@@ -390,8 +390,12 @@ cshow();
 <script>
 (function(){const m=document.querySelector('main');if(!m)return;const secs=[...m.querySelectorAll('section')].filter(s=>s.querySelector(':scope>.etiquette'));
 if(secs.length<3)return;const nav=document.createElement('nav');nav.className='lis-nav';
+const brut=secs.map(s=>s.querySelector(':scope>.etiquette').textContent.replace(/\s*:\s*\d+\s*\/\s*\d+.*$/,'').trim());
+const tetes=brut.map(t=>t.split('·')[0].trim());
 secs.forEach((s,i)=>{s.id=s.id||'ch'+(i+1);const a=document.createElement('a');a.href='#'+s.id;
-let t=s.querySelector(':scope>.etiquette').textContent.replace(/\s*·.*$/,'').replace(/\s*:.*$/,'').trim();a.textContent=t.length>26?t.slice(0,24)+'…':t;nav.appendChild(a)});
+const parts=brut[i].split('·').map(x=>x.trim());let t=parts[0];
+if(tetes.filter(x=>x===t).length>1&&parts[1])t=parts[1].replace(/^\d+\.\s*/,'');
+t=t.replace(/\s*:.*$/,'');t=t.charAt(0).toUpperCase()+t.slice(1);a.textContent=t.length>26?t.slice(0,24)+'…':t;nav.appendChild(a)});
 const hero=m.querySelector('header');(hero||m.firstElementChild).insertAdjacentElement('afterend',nav);
 const links=[...nav.children];const pb=document.querySelector('.lis-progres');
 function maj(){const y=window.scrollY+120;let k=0;secs.forEach((s,i)=>{if(s.offsetTop<=y)k=i});links.forEach((a,i)=>a.classList.toggle('on',i===k));
