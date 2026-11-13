@@ -3,32 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Dicter à Claude, net du premier coup</title>
+<title>Dicter à Claude : la mesure et la méthode</title>
 <style>
 /*KIT*/
 main{max-width:640px;margin:0 auto;position:relative;z-index:1;padding:0 16px 60px}
 .hero{padding:60px 4px 26px;position:relative}
 .hero .orbe{--d:70px;position:absolute;right:6px;top:44px;animation:souffle 6s ease-in-out infinite}
 @keyframes souffle{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-.hero h1{font-size:33px;line-height:1.08;letter-spacing:-.03em;max-width:12ch}
-.hero p{margin:16px 0 0;font-size:16px;line-height:1.5;max-width:34ch;color:var(--texte-2)}
-.hero p b,.carte p b,.franc b,.bilan b{color:var(--texte)}
+.hero h1{font-size:33px;line-height:1.08;letter-spacing:-.03em;max-width:13ch}
+.hero p{margin:16px 0 0;font-size:16px;line-height:1.5;max-width:36ch;color:var(--texte-2)}
+.hero p b,.carte p b,.franc b,.bilan b,.spec p b,.spec li b{color:var(--texte)}
 section{margin:34px 0}
 section>.etiquette{display:block;margin:0 4px 10px}
 .carte{padding:20px;margin-bottom:12px}
 .carte h2{font-size:23px;letter-spacing:-.02em;line-height:1.15}
-.carte p{margin:10px 0 0;line-height:1.55;color:var(--texte-2)}
+.carte>p{margin:10px 0 0;line-height:1.55;color:var(--texte-2)}
 .franc{border-left:2px solid var(--pan-2);padding:14px 16px;margin:14px 0 0;color:var(--texte-2);font-size:14px;line-height:1.5;border-radius:0 var(--r-m) var(--r-m) 0;background:rgba(40,95,255,.06)}
 .spec{padding:14px 0;border-top:1px solid var(--filet)}
 .spec:first-of-type{border-top:0;padding-top:4px}
 .num{font:600 12px var(--police-mono);color:var(--pan-3);letter-spacing:.06em}
-.spec h3{font-size:18px;margin-top:4px}
+.spec h3{font-size:18px;margin-top:4px;letter-spacing:-.01em}
 .spec p{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--texte-2)}
+.spec ul{margin:8px 0 0;padding-left:18px;color:var(--texte-2);font-size:14px;line-height:1.55}
 .dictee{font-size:15px;line-height:1.6;color:var(--texte-2);margin:10px 0 0;padding:14px 16px;border-radius:var(--r-m);background:rgba(255,255,255,.6);border:1px solid var(--filet)}
 .dictee mark{background:rgba(40,95,255,.14);color:var(--texte);border-radius:4px;padding:0 3px}
 .dictee s{color:var(--texte-3);text-decoration-color:rgba(36,54,184,.5)}
 .formule{font-family:var(--large);font-size:20px;line-height:1.35;letter-spacing:-.02em;margin:12px 0 0}
 .formule b{color:var(--pan-3);font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0 0;font-size:14px}
+th,td{text-align:left;padding:9px 6px;border-top:1px solid var(--filet);vertical-align:top}
+th{font:600 11px var(--police-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--texte-3);border-top:0}
+td:not(:first-child),th:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+td b{color:var(--pan-3)}
+.chiffre{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-top:1px solid var(--filet)}
+.chiffre:first-of-type{border-top:0;padding-top:2px}
+.chiffre .gros{font-family:var(--large);font-size:30px;letter-spacing:-.03em;color:var(--pan-3);min-width:92px;line-height:1}
+.chiffre p{margin:0;font-size:14px;line-height:1.45;color:var(--texte-2)}
+.chiffre p b{color:var(--texte)}
+.barre{height:6px;border-radius:3px;background:rgba(36,54,184,.1);margin-top:6px;overflow:hidden}
+.barre i{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--bleu-chat),var(--bleu-renard));width:0;transition:width 1.2s var(--ressort)}
+.modele{font-size:15px;line-height:1.55;margin:8px 0 0;padding:12px 14px;border-radius:var(--r-m);background:rgba(40,95,255,.06);color:var(--texte)}
+.modele small{display:block;font:600 11px var(--police-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--texte-3);margin-bottom:4px}
 .puces{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
 .puce{background:rgba(255,255,255,.7);border:1px solid var(--filet);color:var(--texte-2);font:500 14px var(--police);padding:9px 14px;border-radius:var(--r-pilule);cursor:pointer;transition:all .3s var(--ressort);-webkit-tap-highlight-color:transparent}
 .puce.on{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--bleu-chat),var(--bleu-renard));box-shadow:0 6px 16px -6px rgba(36,54,184,.6);transform:scale(1.04)}
@@ -37,6 +52,9 @@ section>.etiquette{display:block;margin:0 4px 10px}
 .suite{margin-top:12px;background:none;border:1px solid var(--filet);color:var(--pan-3);font:600 13px var(--police);padding:8px 14px;border-radius:var(--r-pilule);cursor:pointer;display:none}
 .suite.vu{display:inline-block}
 .score{font:600 11px var(--police-mono);letter-spacing:.09em;text-transform:uppercase;color:var(--texte-3);margin-left:10px}
+.objectif{display:grid;grid-template-columns:1fr auto auto;gap:6px 14px;font-size:14px;margin-top:10px;color:var(--texte-2)}
+.objectif b{color:var(--texte)}
+.objectif .v{font:600 12px var(--police-mono);color:var(--pan-3);text-align:right}
 .pied{font-size:13px;color:var(--texte-3);line-height:1.5;margin:40px 4px 0}
 </style>
 </head>
@@ -44,37 +62,131 @@ section>.etiquette{display:block;margin:0 4px 10px}
 <main>
   <header class="hero">
     <span class="orbe"></span>
-    <span class="etiquette">Toi et Claude · dicter</span>
-    <h1>Dicter aussi net que tu écris</h1>
-    <p>Ton constat du 14/11 : <b>à l'oral tu vas 3 fois plus vite, mais le prompt perd un tiers de sa précision.</b> La précision ne vient pas des mots : elle vient de l'ordre. Quatre temps, toujours les mêmes.</p>
+    <span class="etiquette">Toi et Claude · dicter · mesuré le 14/11</span>
+    <h1>Tu avais raison sur la vitesse, tort sur la cause</h1>
+    <p>Mesuré sur <b>1 251 messages</b> du 25/10 au 14/11 : à l'oral tu vas bien 3 fois plus vite par mot. Mais l'oral n'est pas moins précis. <b>C'est la longueur qui coûte, et l'oral te rend 3 fois plus long.</b></p>
   </header>
+
+  <section>
+    <span class="etiquette">La mesure · audio contre clavier</span>
+    <div class="verre carte">
+      <table>
+        <tr><th></th><th>Audio</th><th>Clavier</th></tr>
+        <tr><td>Messages</td><td>712</td><td>281</td></tr>
+        <tr><td>Mots par message (médiane)</td><td><b>43</b></td><td>14</td></tr>
+        <tr><td>Temps par mot</td><td><b>3,4 s</b></td><td>9,9 s</td></tr>
+        <tr><td>Temps avant d'envoyer (médiane)</td><td>131 s</td><td>140 s</td></tr>
+        <tr><td>Note du Jury sur 10</td><td>7,08</td><td>7,33</td></tr>
+        <tr><td>Messages qui déclenchent une question</td><td><b>12 %</b></td><td>7 %</td></tr>
+        <tr><td>Trous « pas encore dit » par message</td><td><b>0,49</b></td><td>0,07</td></tr>
+      </table>
+      <div class="franc"><b>Comment c'est mesuré :</b> chaque message noté par ton Jury est rapproché de l'historique Wispr Flow (durée de parole, mots) et de l'heure de fin de ma réponse précédente. Temps par mot = délai entre ma réponse et ton envoi, divisé par tes mots. Détail et limites en bas de page.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Les 8 faits qui changent la méthode</span>
+    <div class="verre carte">
+      <div class="chiffre"><span class="gros">2,9×</span><p><b>Plus vite par mot à l'oral.</b> Ton estimation « 3× » est juste. Tu parles à 239 mots par minute, un débit très rapide, et Wispr suit : tu corriges moins d'un mot par dictée.</p></div>
+      <div class="chiffre"><span class="gros">= 2 min</span><p><b>Mais tu n'envoies pas plus vite.</b> 131 s par message audio, 140 s au clavier. La vitesse gagnée part en mots supplémentaires, pas en temps gagné. Tu convertis la vitesse en longueur.</p></div>
+      <div class="chiffre"><span class="gros">7,24 = 7,28</span><p><b>À longueur égale, l'oral est aussi précis que l'écrit.</b> Sous 25 mots, mêmes notes, mêmes trous (zéro). Le « 1,5× moins bon » n'existe pas à longueur égale.</p></div>
+      <div class="chiffre"><span class="gros">17 %</span><p><b>Au-delà de 60 mots, un message sur six me fait poser une question</b> (contre 8 % sous 25 mots), avec 1,5 trou par message. La longueur noie l'information qui manque.</p></div>
+      <div class="chiffre"><span class="gros">1 / 3</span><p><b>Un trou sur trois = « lequel exactement ».</b> Fichier, vidéo, page, document non nommés. C'est le trou le plus fréquent, et le plus facile à boucher.</p></div>
+      <div class="chiffre"><span class="gros">21 / 712</span><p><b>Tes « en fait » ne coûtent rien.</b> 21 occurrences sur 712 dictées. La version 1 de ce guide en faisait un piège : c'était faux, retiré.</p></div>
+      <div class="chiffre"><span class="gros">2 %</span><p><b>Commencer par un verbe d'action divise les questions par 3 ou 4.</b> Clavier : 2 % de questions contre 8 %. Audio : 9 % contre 13 %. Tu le fais déjà une fois sur cinq.</p></div>
+      <div class="chiffre"><span class="gros">7,9</span><p><b>Tes meilleurs messages viennent de l'iPhone.</b> 18 mots en médiane, note 7,9, 9 % de questions. Le petit écran te force à la concision. Le soir après 19 h, à l'inverse : 17 % de questions, messages plus longs.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Le diagnostic en une chaîne</span>
+    <div class="verre carte">
+      <h2>À l'oral, tu dis tout ce que tu penses. Le trou se noie.</h2>
+      <p>Oral → 3× plus de mots → le raisonnement, le contexte et parfois deux demandes arrivent dans le même message → l'information qui manque (quel fichier, quelle forme) se perd au milieu → je pose une question ou je devine → un aller-retour de plus, et ton attention casse.</p>
+      <div class="franc"><b>Donc la cible n'est pas « parler mieux ». C'est « parler aussi court que tu écris ».</b> Tes messages clavier font 14 mots. Tes dictées font 7 secondes. Garde la dictée de 7 secondes, envoie, et refais-en une.</div>
+    </div>
+  </section>
 
   <section>
     <span class="etiquette">La formule, à dire dans cet ordre</span>
     <div class="verre carte">
-      <p class="formule"><b>Je veux</b> [le livrable], <b>pour</b> [le but], <b>à partir de</b> [la source, où elle est], <b>en</b> [la contrainte]. <b>Ce que je ne sais pas encore :</b> [le flou].</p>
-      <div class="franc"><b>Pourquoi ça marche :</b> Tokn remet chaque dictée au propre dans exactement ces cases (Objectif, Livrable, Contexte, Contraintes, Pas encore dit). Si tu les dis dans l'ordre, rien ne se perd à la traduction.</div>
+      <p class="formule"><b>[Verbe]</b> [le livrable], <b>pour</b> [le but], <b>à partir de</b> [la source, où elle est], <b>en</b> [la forme]. <b>C'est bon quand</b> [le critère].</p>
+      <div class="franc"><b>Pourquoi ça marche :</b> Tokn remet chaque dictée au propre dans ces cases (Objectif, Livrable, Contexte, Contraintes, Pas encore dit). Dites dans l'ordre, elles arrivent pleines. Le « c'est bon quand » est nouveau : il tue le « je ne vois rien » avant qu'il arrive.</div>
+      <p class="dictee"><mark>Mesure</mark> l'écart audio / clavier dans mes prompts, <mark>pour</mark> savoir si je dois dicter moins, <mark>à partir de</mark> mes dictées Wispr et du Jury, <mark>en</mark> un tableau dans la page du guide. <mark>C'est bon quand</mark> je vois le tableau en ligne.</p>
     </div>
   </section>
 
   <section>
-    <span class="etiquette">Ta dictée du 14/11, avant / après</span>
+    <span class="etiquette">Les règles · 1. avant de parler</span>
     <div class="verre carte">
-      <p class="dictee"><s>Là, j'ai une pensée. Quand on parle avec Claude, l'écriture, en fait, quand on fait des prompts écrits, on va plus lentement, mais notre prompt est meilleur… même si notre audio est moins bon de 1,5, on va trois fois plus vite…</s> J'aimerais que tu me fasses <mark>un cours dans ma direction artistique</mark> qui m'apprend <mark>à être précis à l'oral</mark>, parce qu'à l'écrit je suis plutôt bon.</p>
-      <p class="dictee"><mark>Je veux</mark> un guide court dans ma DA, <mark>pour</mark> dicter aussi précis que j'écris, <mark>à partir de</mark> l'enregistrement 17 dans Téléchargements, <mark>en</mark> une page. <mark>Ce que je ne sais pas encore :</mark> rien.</p>
-      <div class="franc"><b>Ce qui manquait :</b> où était l'enregistrement. J'ai dû le chercher dans tes mails, tes captures et ton Mac avant de commencer. Une source nommée = zéro détour.</div>
+      <div class="spec"><span class="num">01 · LA CIBLE D'ABORD</span><h3>Nomme la chose dans ta tête avant d'appuyer sur le micro</h3>
+        <p>Fichier + dossier (« le m4a dans Téléchargements »), vidéo + numéro (« J12 »), page + nom (« la page Heattech »), personne (« Emilio », pas « lui »), date absolue (« le 16/11 », pas « demain » : je ne suis pas toujours à ton heure).</p></div>
+      <div class="spec"><span class="num">02 · UNE DEMANDE, UN MESSAGE</span><h3>« Et aussi » = message suivant</h3>
+        <p>Le robot qui te note le plus bas est Pareto (6,6) : il cherche la demande principale et en trouve plusieurs. Dès que tu entends « et aussi », « pareil pour », « en plus » dans ta bouche : envoie, puis redicte. Deux messages courts me coûtent moins qu'un long.</p></div>
+      <div class="spec"><span class="num">03 · 40 MOTS, 10 SECONDES</span><h3>Ta dictée médiane fait 7 s. C'est la bonne taille.</h3>
+        <p>Au-delà de 60 mots, 17 % de questions. Fixe-toi 40 mots, soit 10 secondes à ton débit. Si tu dépasses, c'est qu'un contexte ou une deuxième demande s'est glissé.</p></div>
+      <div class="spec"><span class="num">04 · LE VERBE EN PREMIER</span><h3>Commence par ce que je dois faire</h3>
+        <p>« Mesure », « monte », « retrouve », « donne ton avis ». Pas « là j'ai une pensée », pas « en fait quand on parle ». Le pourquoi vient après, et seulement s'il change ce que je fais.</p></div>
+      <div class="spec"><span class="num">05 · AVIS OU ACTION, DIS-LE</span><h3>« Ton avis » et « fais » ne lancent pas le même travail</h3>
+        <p>« Ton avis sur X » = je juge, je ne touche à rien. « Fais X » = j'agis. « Prépare X » = je construis, tu valides. Sans le mot, je devine, et je me trompe surtout sur l'argent, l'image et les messages aux autres.</p></div>
     </div>
   </section>
 
   <section>
-    <span class="etiquette">Les 3 pièges de l'oral, et la parade</span>
+    <span class="etiquette">Les règles · 2. pendant</span>
     <div class="verre carte">
-      <div class="spec"><span class="num">01 · LE RAISONNEMENT AVANT LA DEMANDE</span><h3>Tu expliques 40 secondes, tu demandes en 5</h3>
-        <p>À l'oral on pense en parlant. Inverse : la demande d'abord, le pourquoi après, seulement s'il change le résultat.</p></div>
-      <div class="spec"><span class="num">02 · LE FICHIER FANTÔME</span><h3>« L'enregistrement », « le doc », « la vidéo »</h3>
-        <p>Chaque chose a un nom et un lieu. Dis les deux : « le m4a dans Téléchargements », « le brief Uniqlo dans damienprime ».</p></div>
-      <div class="spec"><span class="num">03 · LA CORRECTION EN DIRECT</span><h3>« en fait », « enfin », « pour autant »</h3>
-        <p>Tu te reprends à voix haute et les deux versions arrivent. Marque un silence, puis redis la phrase entière. Seule la dernière compte.</p></div>
+      <div class="spec"><span class="num">06 · LA FORME DU LIVRABLE</span><h3>Dis à quoi ressemble « fini »</h3>
+        <p>Un tableau, trois lignes, une page, un fichier dans Téléchargements, un bouton dans l'Encart, un reel en essai. Sans ça je choisis, et c'est là que tu dis « trop long » ou « je vois rien ».</p></div>
+      <div class="spec"><span class="num">07 · LE CRITÈRE DE FINI</span><h3>« C'est bon quand… »</h3>
+        <p>« …quand je vois la miniature dans Téléchargements », « …quand le reel est dans /essais », « …quand le tableau est en ligne ». Une phrase. Elle me dit quoi vérifier avant de te dire « fait ».</p></div>
+      <div class="spec"><span class="num">08 · LES CHIFFRES EN CHIFFRES</span><h3>Montants, heures, quantités : avec l'unité</h3>
+        <p>« 3 500 euros », « 19 h Paris », « 4 reels par jour ». Les dictées mangent les unités et les fuseaux. L'heure est toujours celle de Paris, dis-le quand tu veux l'heure locale.</p></div>
+      <div class="spec"><span class="num">09 · LE CONTEXTE, ÉTIQUETÉ</span><h3>Si tu racontes la situation, annonce-la</h3>
+        <p>« Contexte : … » devant, et je sais que ce n'est pas une demande. Le raisonnement à voix haute n'est pas un défaut, il est utile, à condition qu'il soit marqué et qu'il vienne après la demande.</p></div>
+      <div class="spec"><span class="num">10 · PETIT OU GROS, DIS LA TAILLE</span><h3>« Petit truc », « gros chantier », « cette nuit »</h3>
+        <p>Ces trois mots règlent mon niveau d'effort, le nombre de sous-agents et le quota que je dépense. Sans eux, je calibre moi-même, parfois trop gros pour un détail, parfois trop léger pour une mission.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Les règles · 3. après ma réponse</span>
+    <div class="verre carte">
+      <div class="spec"><span class="num">11 · « PAS ENCORE DIT » = LE TROU</span><h3>Réponds à la ligne, pas au message</h3>
+        <p>Quand Tokn affiche « Pas encore dit : quel fichier ? », réponds « le m4a dans Téléchargements ». Un mot, un nom. Ne redicte jamais la demande entière : la deuxième version est toujours plus longue que la première.</p></div>
+      <div class="spec"><span class="num">12 · LE CONSEIL DU JURY, C'EST LE RETOUR</span><h3>La ligne sous « Jury x/10 » dit ce qui manquait</h3>
+        <p>Elle est courte et concrète. Lis-la une fois, applique-la au message suivant. Note sous 7 = un trou que j'ai dû combler à ta place.</p></div>
+      <div class="spec"><span class="num">13 · CORRIGER = « NON : X »</span><h3>Donne la correction seule</h3>
+        <p>« Non : la vidéo J12, pas J13. » Pas la demande entière à nouveau. Je garde tout le reste tel quel.</p></div>
+      <div class="spec"><span class="num">14 · DÉCIDER = LE NUMÉRO</span><h3>Quand je te donne des options, réponds par l'option</h3>
+        <p>« Option 2. » ou « La 2, mais en bleu. » Les boutons Tokn font ça en un tap. Redonner le raisonnement derrière le choix ne change rien à ce que je fais.</p></div>
+      <div class="spec"><span class="num">15 · FLOU POUR TOI AUSSI ? DIS-LE</span><h3>« C'est flou, pose-moi des questions »</h3>
+        <p>Quand l'idée n'est pas finie dans ta tête, ne la dicte pas en 120 mots. Dis cette phrase : je lance l'interrogatoire une question à la fois, et la fiche de cadrage sort à la fin. C'est fait pour ça.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Les règles · 4. le moment et l'appareil</span>
+    <div class="verre carte">
+      <div class="spec"><span class="num">16 · LE SOIR, 20 MOTS</span><h3>Après 19 h, tes messages s'allongent et les questions montent à 17 %</h3>
+        <p>Règle : le soir, 20 mots maximum. Si l'idée est plus grosse, dépose-la dans le Cerveau en capture et dicte la demande le matin, quand tu es à 9 % de questions.</p></div>
+      <div class="spec"><span class="num">17 · L'IPHONE EST TON MEILLEUR CLAVIER</span><h3>18 mots, note 7,9</h3>
+        <p>Ne cherche pas à écrire plus long sur le téléphone. Au contraire : quand tu es au Mac, dicte comme si tu étais sur l'iPhone.</p></div>
+      <div class="spec"><span class="num">18 · LA DICTÉE LONGUE A UNE PLACE : LE CERVEAU</span><h3>Penser à voix haute, oui, mais pas dans la fenêtre de commande</h3>
+        <p>Ton enregistrement de 61 secondes était une bonne pensée. Sa place est une capture audio damienprime, que je transcris et classe. La fenêtre Tokn est pour les ordres courts.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Phrases types · à dicter telles quelles</span>
+    <div class="verre carte">
+      <p class="modele"><small>Montage</small>Monte l'épisode J14 à partir des rushs du 13/11 sur le NAS, version courte, c'est bon quand l'aperçu est dans l'Encart.</p>
+      <p class="modele"><small>Artefact</small>Fais une page dans ma DA sur [sujet], à partir de [source], avec un jeu, c'est bon quand le lien est en ligne.</p>
+      <p class="modele"><small>Collab</small>Brief Uniqlo : ce que je dois livrer, pour quand, à partir des mails et du contrat, en 5 lignes.</p>
+      <p class="modele"><small>Bug Tokn</small>Tokn : [ce qui se passe] quand je [geste], sur [iPhone / Mac], depuis [quand]. Répare, c'est bon quand je peux refaire le geste.</p>
+      <p class="modele"><small>Avis</small>Ton avis, pas d'action : [l'idée en une phrase]. Contre-argument d'abord.</p>
+      <p class="modele"><small>Mission de nuit</small>Cette nuit : [une seule chose], à partir de [source], c'est bon quand [critère]. Ne publie rien.</p>
+      <p class="modele"><small>Retrouver</small>Retrouve [le doc / l'artefact] sur [sujet], fait vers le [date], donne le lien.</p>
+      <p class="modele"><small>Correction</small>Non : [la correction seule]. Le reste est bon.</p>
     </div>
   </section>
 
@@ -89,33 +201,78 @@ section>.etiquette{display:block;margin:0 4px 10px}
   </section>
 
   <section>
-    <span class="etiquette">Le réflexe quand Tokn te répond</span>
+    <span class="etiquette">Le jeu 2 : où tu coupes ? <span class="score" id="score2"></span></span>
     <div class="verre carte">
-      <h2>« Pas encore dit » = le trou de ta dictée</h2>
-      <p>Quand la version remise au propre affiche une ligne <b>Pas encore dit</b>, ne redicte pas tout. Réponds à cette ligne, en un mot ou un nom de fichier. C'est ton seul retour à faire.</p>
+      <p>Chaque dictée contient deux demandes. Touche la phrase où le deuxième message devrait commencer.</p>
+      <div class="puces" id="cpuces"></div>
+      <div class="bilan" id="cbilan"></div>
+      <button class="suite" id="csuite">Dictée suivante</button>
     </div>
   </section>
 
-  <p class="pied">Fait depuis « Nouvel enregistrement 17 » (61 s, 14/11). Ton ratio 3× / 1,5× est ton estimation, pas une mesure : si tu veux, je la mesure sur une semaine de dictées.</p>
+  <section>
+    <span class="etiquette">Le protocole · 7 jours, remesuré</span>
+    <div class="verre carte">
+      <h2>Trois chiffres à faire bouger d'ici le 21/11</h2>
+      <div class="objectif">
+        <span>Mots par message audio</span><span class="v">43</span><span class="v">→ 30</span>
+        <span>Messages audio qui déclenchent une question</span><span class="v">12 %</span><span class="v">→ 7 %</span>
+        <span>Trous « pas encore dit » par message</span><span class="v">0,49</span><span class="v">→ 0,20</span>
+      </div>
+      <div class="franc"><b>Comment :</b> cette semaine, une seule règle à la fois. Jours 1-2 : le verbe en premier. Jours 3-4 : nommer la cible. Jours 5-7 : une demande par message. Le 21/11 je relance la mesure et je te donne les trois chiffres, rien d'autre.</div>
+    </div>
+  </section>
+
+  <section>
+    <span class="etiquette">Les limites de la mesure, honnêtement</span>
+    <div class="verre carte">
+      <div class="spec"><p><b>Le temps par mot au clavier est un plafond.</b> Il inclut le temps de lire ma réponse. Le vrai temps de frappe est plus court, donc l'écart réel est sans doute un peu inférieur à 2,9×.</p></div>
+      <div class="spec"><p><b>La note du Jury est l'avis de robots</b>, pas la vérité. Mais les trous « pas encore dit » et les questions posées sont des faits : ce sont les cas où j'ai dû te redemander.</p></div>
+      <div class="spec"><p><b>258 messages n'ont pas pu être étiquetés</b> (68 dictés sur iPhone hors Wispr, 190 sans correspondance). Ils ne sont pas dans les colonnes du tableau. Les tendances tiennent sans eux.</p></div>
+      <div class="spec"><p><b>Tes messages s'améliorent déjà</b> : note moyenne 6,9 la semaine du 27/10, 7,4 cette semaine, et la part d'audio est passée de 76 % à 44 %. La mesure du 21/11 dira si c'est la méthode ou le hasard.</p></div>
+    </div>
+  </section>
+
+  <p class="pied">Sources : journal du Jury (1 251 messages, 25/10 → 14/11), historique Wispr Flow (durée de parole et mots par dictée), transcripts Claude Code (délai avant envoi). Script : ~/Documents/guide-dictee-claude/mesure/mesure.py, rejouable.</p>
 </main>
 <script>
 const J=[
- {d:"Fais-moi la miniature pour J12, dans le style des autres, avec le titre en gros.",o:["Le livrable","Le but","La source","La contrainte"],r:2,e:"Quelle photo ? Quel titre exactement ? Sans la source, je choisis à ta place et tu refais un aller-retour."},
+ {d:"Fais-moi la miniature pour J12, dans le style des autres, avec le titre en gros.",o:["Le livrable","Le but","La source","Le critère de fini"],r:2,e:"Quelle photo ? Quel titre exactement ? Sans la source, je choisis à ta place et tu refais un aller-retour."},
  {d:"Je veux un script pour la vidéo Heattech, à partir du brief Uniqlo dans damienprime, en 45 secondes.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Tout y est : livrable, source nommée, contrainte. Le but est évident ici, pas besoin de le dire."},
  {d:"Regarde mes stats et dis-moi ce qui marche, à partir de YouTube, mais pas un pavé.",o:["Le livrable","Le but","La source","La contrainte"],r:0,e:"« Dis-moi » n'est pas un livrable. Un tableau ? Trois lignes ? Une page ? Dis la forme, tu auras la forme."},
- {d:"Trie mes mails de collab, à partir de Gmail depuis lundi, juste une ligne par marque.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Complet. Et « juste une ligne par marque » fait à la fois contrainte et livrable."}
+ {d:"Trie mes mails de collab, à partir de Gmail depuis lundi, juste une ligne par marque.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Complet. Et « juste une ligne par marque » fait à la fois contrainte et livrable."},
+ {d:"Poste-la tout de suite en automatique sur Instagram et TikTok, je suis très content du rendu.",o:["Le livrable","La cible (laquelle ?)","Le but","Rien, c'est complet"],r:1,e:"« La » = laquelle ? C'était un vrai message, noté 4,2 : deux trous, et publier en public est irréversible. Nomme la vidéo."},
+ {d:"Monte l'épisode J14 avec les rushs du NAS, version courte, c'est bon quand l'aperçu est dans l'Encart.",o:["La source","Le critère de fini","Le livrable","Rien, c'est complet"],r:3,e:"Complet, et le critère de fini dit exactement quoi vérifier avant de te dire « fait »."},
+ {d:"Demain je tourne rien, tous les calendriers sont mauvais, tout est à refaire, on va tout refaire cette nuit.",o:["Le livrable","La source","Le but","Le critère de fini"],r:0,e:"Vrai message, noté 4,8. Beaucoup de contexte, zéro demande : refaire quoi, sous quelle forme ? Commence par le verbe."},
+ {d:"Ton avis, pas d'action : lancer une 2e série dès décembre. Contre-argument d'abord.",o:["Le livrable","Le but","La source","Rien, c'est complet"],r:3,e:"Complet pour un avis : le mode est dit (avis, pas action), la demande tient en une phrase."}
 ];
 let i=0,pts=0;
 const D=document.getElementById("jdictee"),P=document.getElementById("jpuces"),B=document.getElementById("jbilan"),S=document.getElementById("jsuite"),SC=document.getElementById("score");
 function show(){const j=J[i];D.textContent="« "+j.d+" »";B.textContent="";S.classList.remove("vu");P.innerHTML="";
- j.o.forEach((t,k)=>{const b=document.createElement("button");b.className="puce";b.textContent=t;b.onclick=()=>rep(k,b);P.appendChild(b)});
+ j.o.forEach((t,k)=>{const b=document.createElement("button");b.className="puce";b.textContent=t;b.onclick=()=>rep(k);P.appendChild(b)});
  SC.textContent=(i+1)+" / "+J.length}
-function rep(k,b){if(B.textContent)return;const ok=k===J[i].r;if(ok)pts++;
+function rep(k){if(B.textContent)return;const ok=k===J[i].r;if(ok)pts++;
  [...P.children].forEach((e,n)=>e.classList.add(n===J[i].r?"on":"faux"));
  B.innerHTML=(ok?"<b>Oui.</b> ":"<b>Non, c'était « "+J[i].o[J[i].r]+" ».</b> ")+J[i].e;
  S.classList.add("vu");S.textContent=i<J.length-1?"Dictée suivante":"Score : "+pts+" / "+J.length+" · rejouer"}
 S.onclick=()=>{if(i<J.length-1){i++}else{i=0;pts=0}show()};
 show();
+const C=[
+ {p:["Monte le J14 en version courte.","Garde la prise où je ris.","Et pareil pour le J15 mais en version longue.","Préviens-moi dans l'Encart."],r:2,e:"« Et pareil pour » ouvre une deuxième commande avec d'autres réglages. Message 2 : « Monte le J15 en version longue. »"},
+ {p:["Retrouve le contrat G-SHOCK signé.","Donne le lien.","Au fait, la vidéo On, il faut la poster quand ?","Vérifie dans les mails."],r:2,e:"« Au fait » = nouvelle demande, nouveau sujet. La question On mérite son propre message, avec sa propre réponse."},
+ {p:["Fais la page Heattech dans ma DA.","Avec les 3 vestes et les prix.","Mets-la en ligne.","Et note dans ta mémoire de toujours partir de cette DA."],r:3,e:"La règle de mémoire est une demande à part : elle vaut pour toujours, la page vaut pour aujourd'hui. Deux messages."}
+];
+let ci=0,cpts=0;
+const CP=document.getElementById("cpuces"),CB=document.getElementById("cbilan"),CS=document.getElementById("csuite"),SC2=document.getElementById("score2");
+function cshow(){const c=C[ci];CB.textContent="";CS.classList.remove("vu");CP.innerHTML="";
+ c.p.forEach((t,k)=>{const b=document.createElement("button");b.className="puce";b.textContent=t;b.style.textAlign="left";b.onclick=()=>crep(k);CP.appendChild(b)});
+ SC2.textContent=(ci+1)+" / "+C.length}
+function crep(k){if(CB.textContent)return;const ok=k===C[ci].r;if(ok)cpts++;
+ [...CP.children].forEach((e,n)=>e.classList.add(n===C[ci].r?"on":"faux"));
+ CB.innerHTML=(ok?"<b>Oui.</b> ":"<b>Non, c'était là : « "+C[ci].p[C[ci].r]+" ». </b>")+C[ci].e;
+ CS.classList.add("vu");CS.textContent=ci<C.length-1?"Dictée suivante":"Score : "+cpts+" / "+C.length+" · rejouer"}
+CS.onclick=()=>{if(ci<C.length-1){ci++}else{ci=0;cpts=0}cshow()};
+cshow();
 </script>
 </body>
 </html>
